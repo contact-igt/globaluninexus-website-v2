@@ -1,12 +1,21 @@
 'use client';
 
 import React from 'react';
-import { Globe, MapPin, Mail, Phone, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { MapPin, Mail, Phone } from 'lucide-react';
 
 interface FooterProps {
     scrollToSection: (id: string) => void;
     handleExploreProducts: () => void;
 }
+
+const QUICK_LINKS = [
+    { label: 'About Us', id: 'about-us' },
+    { label: 'Process', id: 'process' },
+    { label: 'Compliance & Quality', id: 'compliance' },
+    { label: 'Contact', id: 'contact' },
+];
+
+const PRODUCT_LINKS = ['Red Chillies', 'Turmeric', 'Cardamom', 'Black Pepper', 'Rice Varieties', 'Cashews & Almonds'];
 
 const Footer: React.FC<FooterProps> = ({ scrollToSection, handleExploreProducts }) => {
     return (
@@ -20,32 +29,28 @@ const Footer: React.FC<FooterProps> = ({ scrollToSection, handleExploreProducts 
                             </div>
                         </div>
                         <p className="mb-6 text-[#F8F9FA]/60">
-                            Connecting India&apos;s finest agricultural produce with the world. Quality, trust, and excellence in every shipment.
+                            Connecting global markets with authentic Indian agricultural products. Purposeful sourcing, dependable partnerships.
                         </p>
-                        <div className="flex gap-4">
-                            {[Facebook, Twitter, Instagram, Linkedin].map((Icon, idx) => (
-                                <a key={idx} href="#" className="w-10 h-10 rounded-full bg-[#132644] border border-white/10 flex items-center justify-center hover:bg-[#C2A470] hover:text-[#132644] hover:border-[#C2A470] transition-all">
-                                    <Icon className="w-5 h-5" />
-                                </a>
-                            ))}
-                        </div>
                     </div>
 
                     <div>
                         <h4 className="text-white font-bold text-lg mb-6 font-serif">Quick Links</h4>
                         <ul className="space-y-4">
-                            {['About Us', 'Products', 'Quality Standards', 'Certifications', 'Contact'].map((link) => (
-                                <li key={link}>
-                                    <button onClick={() => link === 'Products' ? handleExploreProducts() : scrollToSection(link.toLowerCase().replace(' ', '-'))} className="hover:text-[#5EBBC8] transition-colors text-left">{link}</button>
+                            {QUICK_LINKS.map((link) => (
+                                <li key={link.id}>
+                                    <button onClick={() => scrollToSection(link.id)} className="hover:text-[#5EBBC8] transition-colors text-left">{link.label}</button>
                                 </li>
                             ))}
+                            <li>
+                                <button onClick={handleExploreProducts} className="hover:text-[#5EBBC8] transition-colors text-left">Products</button>
+                            </li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="text-white font-bold text-lg mb-6 font-serif">Our Products</h4>
                         <ul className="space-y-4">
-                            {['Coconut', 'Turmeric', 'Spices', 'Guntur Chillies', 'Rice & Millets', 'Fresh Fruits'].map((link) => (
+                            {PRODUCT_LINKS.map((link) => (
                                 <li key={link}>
                                     <button onClick={handleExploreProducts} className="hover:text-[#5EBBC8] transition-colors text-left">{link}</button>
                                 </li>
@@ -58,7 +63,7 @@ const Footer: React.FC<FooterProps> = ({ scrollToSection, handleExploreProducts 
                         <ul className="space-y-4">
                             <li className="flex items-start gap-4">
                                 <MapPin className="text-[#C2A470] w-6 h-6 flex-shrink-0" />
-                                <span>No: 101, NMK STREET, Ayanavaram, Chennai, Tamil Nadu, India - 600023</span>
+                                <span>No. 101, NMK Street, Aynavaram, Chennai, Tamil Nadu, India - 600023</span>
                             </li>
                             <li className="flex items-center gap-4">
                                 <Mail className="text-[#C2A470] w-6 h-6 flex-shrink-0" />
@@ -72,14 +77,13 @@ const Footer: React.FC<FooterProps> = ({ scrollToSection, handleExploreProducts 
                     </div>
                 </div>
 
-                <div className="border-t border-[#267C92]/30 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <div className="text-sm text-[#F8F9FA]/50">
-                        © 2025 UniNexus Traders Pvt. Ltd. All rights reserved.
+                <div className="border-t border-[#267C92]/30 pt-8 flex flex-col md:flex-row justify-between items-center gap-3 text-sm">
+                    <div className="text-[#F8F9FA]/50">
+                        © 2026 UniNexus Traders Private Limited. All rights reserved.
                     </div>
-                    <div className="flex gap-8 text-sm">
-                        <a href="#" className="hover:text-[#C2A470] transition-colors">Privacy Policy</a>
-                        <a href="#" className="hover:text-[#C2A470] transition-colors">Terms of Service</a>
-                        <a href="#" className="hover:text-[#C2A470] transition-colors">Cookie Policy</a>
+                    <div className="text-[#F8F9FA]/50 flex flex-wrap items-center gap-x-6 gap-y-1">
+                        <span>IEC: <span className="text-[#F8F9FA]/70">AADCU9786H</span></span>
+                        <span>GSTIN: <span className="text-[#F8F9FA]/70">33AADCU9786H1ZT</span></span>
                     </div>
                 </div>
             </div>

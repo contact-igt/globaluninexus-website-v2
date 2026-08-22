@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Menu, X, Globe, ChevronRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 interface NavbarProps {
     isScrolled: boolean;
@@ -11,6 +11,13 @@ interface NavbarProps {
     handleExploreProducts: () => void;
     setCurrentView: (view: string) => void;
 }
+
+const NAV_ITEMS = [
+    { label: 'About Us', id: 'about-us' },
+    { label: 'Process', id: 'process' },
+    { label: 'Compliance', id: 'compliance' },
+    { label: 'Contact', id: 'contact' },
+];
 
 const Navbar: React.FC<NavbarProps> = ({
     isScrolled,
@@ -22,35 +29,41 @@ const Navbar: React.FC<NavbarProps> = ({
 }) => {
     return (
         <nav
-            className={`fixed w-full z-50 transition-all duration-300 bg-white shadow-md ${isScrolled ? 'py-2' : 'py-3'
+            className={`fixed w-full z-50 transition-all duration-300 bg-[#FBF6EC]/95 backdrop-blur-sm shadow-sm border-b border-[#C2A470]/20 ${isScrolled ? 'py-2' : 'py-3'
                 }`}
         >
             <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
-                <div
-                    className="flex items-center gap-2 cursor-pointer group"
+                <button
+                    className="flex items-center gap-2 cursor-pointer"
                     onClick={() => setCurrentView('home')}
+                    aria-label="UniNexus Traders — go to homepage"
                 >
-                    <img src="/assets/logo2.jpg" alt="Logo" className="w-20 md:w-[90px] ml-5 object-contain" />
-                </div>
+                    <img src="/assets/logo2.jpg" alt="UniNexus Traders Private Limited" className="w-16 md:w-20 object-contain rounded-md" />
+                </button>
 
                 {/* Desktop Nav */}
                 <div className="hidden md:flex items-center gap-8">
-                    {['About Us', 'Products', 'Process', 'Contact'].map((item) => (
+                    {NAV_ITEMS.map((item) => (
                         <button
-                            key={item}
-                            onClick={item === 'Products' ? handleExploreProducts : () => scrollToSection(item.toLowerCase().replace(' ', '-'))}
-                            className="text-base font-semibold text-[#132644] hover:text-[#5EBBC8] transition-colors"
+                            key={item.id}
+                            onClick={() => scrollToSection(item.id)}
+                            className="text-base font-semibold text-[#132644] hover:text-[#267C92] transition-colors"
                         >
-                            {item}
+                            {item.label}
                         </button>
                     ))}
+                    <button
+                        onClick={handleExploreProducts}
+                        className="text-base font-semibold text-[#132644] hover:text-[#267C92] transition-colors"
+                    >
+                        Products
+                    </button>
 
-                    {/* Call to Action Button */}
                     <button
                         onClick={() => scrollToSection('contact')}
-                        className="bg-[#C2A470] hover:bg-[#b0935f] text-[#132644] px-5 py-2.5 rounded-full text-base font-semibold transition-colors shadow-lg flex items-center gap-2"
+                        className="bg-[#C2A470] hover:bg-[#A9855A] text-[#132644] px-5 py-2.5 rounded-full text-base font-semibold transition-colors shadow-sm"
                     >
-                        Request Quote
+                        Request a Quote
                     </button>
                 </div>
 
@@ -58,6 +71,9 @@ const Navbar: React.FC<NavbarProps> = ({
                 <button
                     className="md:hidden p-2"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+                    aria-expanded={isMobileMenuOpen}
+                    aria-controls="mobile-menu"
                 >
                     {isMobileMenuOpen ? (
                         <X className="text-[#132644]" />
@@ -69,17 +85,23 @@ const Navbar: React.FC<NavbarProps> = ({
 
             {/* Mobile Nav Dropdown */}
             {isMobileMenuOpen && (
-                <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-xl border-t border-[#C2A470]/30">
-                    <div className="flex flex-col p-4 gap-4">
-                        <button onClick={() => scrollToSection('about-us')} className="text-left py-2 font-medium text-[#132644] border-b border-gray-100">About Us</button>
-                        <button onClick={handleExploreProducts} className="text-left py-2 font-medium text-[#132644] border-b border-gray-100">Products</button>
-                        <button onClick={() => scrollToSection('process')} className="text-left py-2 font-medium text-[#132644] border-b border-gray-100">Process</button>
-                        <button onClick={() => scrollToSection('contact')} className="text-left py-2 font-medium text-[#132644] border-b border-gray-100">Contact</button>
+                <div id="mobile-menu" className="md:hidden absolute top-full left-0 w-full bg-[#FBF6EC] shadow-xl border-t border-[#C2A470]/30">
+                    <div className="flex flex-col p-4 gap-1">
+                        {NAV_ITEMS.map((item) => (
+                            <button
+                                key={item.id}
+                                onClick={() => scrollToSection(item.id)}
+                                className="text-left py-3 font-medium text-[#132644] border-b border-black/5"
+                            >
+                                {item.label}
+                            </button>
+                        ))}
+                        <button onClick={handleExploreProducts} className="text-left py-3 font-medium text-[#132644] border-b border-black/5">Products</button>
                         <button
                             onClick={() => scrollToSection('contact')}
-                            className="bg-[#C2A470] text-[#132644] w-full py-3 rounded-lg font-medium"
+                            className="bg-[#C2A470] text-[#132644] w-full py-3 rounded-lg font-semibold mt-4"
                         >
-                            Request Quote
+                            Request a Quote
                         </button>
                     </div>
                 </div>

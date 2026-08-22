@@ -16,6 +16,7 @@ export default function Home() {
   const [currentView, setCurrentView] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [enquiryProduct, setEnquiryProduct] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,8 +45,18 @@ export default function Home() {
     setIsMobileMenuOpen(false);
   };
 
+  const handleEnquireProduct = (productName) => {
+    setEnquiryProduct(productName);
+    setCurrentView("home");
+    setIsMobileMenuOpen(false);
+    setTimeout(() => {
+      const element = document.getElementById("contact");
+      if (element) element.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  };
+
   if (currentView === "products") {
-    return <DetailedProductView onBack={() => setCurrentView("home")} />;
+    return <DetailedProductView onBack={() => setCurrentView("home")} onEnquire={handleEnquireProduct} />;
   }
 
   return (
@@ -66,15 +77,15 @@ export default function Home() {
 
       <WhyUs />
 
-      <OurEdge />
-
-      <Certificates  />
-
       <Mission />
+
+      <OurEdge />
 
       <Products handleExploreProducts={handleExploreProducts} />
 
-      <CTA />
+      <Certificates />
+
+      <CTA presetProduct={enquiryProduct} />
 
       <Footer
         scrollToSection={scrollToSection}

@@ -8,11 +8,23 @@
   --global-teal: #267C92;
   --network-cyan: #5EBBC8;
   --prestige-gold: #C2A470;
+  --prestige-gold-dark: #A9855A;
   --bg-light: #F8F9FA;
+  --cream: #F7F1E6;
+  --ivory: #FBF6EC;
 
   /* Font families */
   --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
-  --font-serif: var(--font-outfit), Georgia, serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 * {
@@ -49,6 +61,15 @@ img {
 button {
   font-family: inherit;
   cursor: pointer;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--prestige-gold);
+  outline-offset: 2px;
 }
 
 h1,

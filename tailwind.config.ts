@@ -13,6 +13,19 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      fontFamily: {
+        sans: ['var(--font-inter)', 'system-ui', '-apple-system', 'sans-serif'],
+        serif: ['var(--font-playfair)', 'Georgia', 'serif'],
+      },
+      colors: {
+        navy: '#132644',
+        cream: '#F7F1E6',
+        ivory: '#FBF6EC',
+        gold: '#C2A470',
+        'gold-dark': '#A9855A',
+        teal: '#267C92',
+        cyan: '#5EBBC8',
+      },
     },
   },
   plugins: [],
