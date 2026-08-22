@@ -45,7 +45,7 @@ const CTA: React.FC<CTAProps> = ({ presetProduct }) => {
 
         try {
             setisloading(true);
-            await fetch("https://script.google.com/macros/s/AKfycbxH1e0c3k7QJ8qLI_XemJS1sRrFZN11lxdU4SyfsFFLBj7GZW7lvhHAyPKH6P77EvN2Bg/exec", {
+            await fetch("https://script.google.com/macros/s/AKfycbzgjfkWwvROzTDz6aeA69SapWZAcXZ_I1AHlnVDdaWZ8wXCTnjrJgxO7I3lGpuX4ocvhg/exec", {
                 method: "POST",
                 body: JSON.stringify(data),
             });

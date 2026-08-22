@@ -37,14 +37,14 @@ const Mission: React.FC = () => {
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                        <div className="flex gap-4 p-6">
+                        <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-[#C2A470]/30 flex gap-4">
                             <MapPin className="w-8 h-8 text-[#C2A470] flex-shrink-0" />
                             <div>
                                 <h5 className="font-bold text-white mb-1">Traceable Sourcing</h5>
                                 <p className="text-white/60 text-sm leading-relaxed">Direct sourcing from verified growing regions to ensure authenticity, traceability and product integrity.</p>
                             </div>
                         </div>
-                        <div className="flex gap-4 p-6">
+                        <div className="bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-[#C2A470]/30 flex gap-4">
                             <Users2 className="w-8 h-8 text-[#C2A470] flex-shrink-0" />
                             <div>
                                 <h5 className="font-bold text-white mb-1">Long-Term Partnership</h5>
