@@ -24,6 +24,13 @@ interface ChilliVariety {
     appearance: string;
 }
 
+interface CashewVariety {
+    label: string;
+    subtitle: string;
+    image: string;
+    desc?: string;
+}
+
 interface PhotoCard {
     label: string;
     image: string;
@@ -44,8 +51,9 @@ interface ProductVarietyData {
     tagline?: string;
     badge?: string;
     description: string;
-    type: 'chilli-grid' | 'turmeric-row' | 'cardamom-grid' | 'pepper-table' | 'cards-list' | 'photo-grid';
+    type: 'chilli-grid' | 'turmeric-row' | 'cardamom-grid' | 'cashew-grid' | 'pepper-table' | 'cards-list' | 'photo-grid';
     chilliVarieties?: ChilliVariety[];
+    cashewVarieties?: CashewVariety[];
     photoCards?: PhotoCard[];
     varieties?: VarietyItem[];
     facts?: string[];
@@ -127,6 +135,42 @@ const VARIETIES_DATA: ProductVarietyData[] = [
         ],
     },
     {
+        id: 'cashews',
+        name: 'Cashews',
+        origin: 'India',
+        badge: 'Export Graded',
+        tagline: 'Export-Quality White Whole Kernels & Grade Sizes',
+        description: 'Carefully graded, naturally rich, export-quality cashews across internationally recognized grade sizes (W180, W210, W240, W320). Sourced directly from certified processing hubs.',
+        type: 'cashew-grid',
+        cashewVarieties: [
+            {
+                label: 'W180',
+                subtitle: 'King of Cashews',
+                image: '/assets/cashew-w180.jpg',
+                desc: 'Largest whole kernel grade (160–180 nuts/lb). Luxurious presentation with rich crunch.',
+            },
+            {
+                label: 'W210',
+                subtitle: 'Jumbo Size',
+                image: '/assets/cashew-w210.jpg',
+                desc: 'Jumbo size whole cashew with smooth white appearance and rich natural crunch.',
+            },
+            {
+                label: 'W240',
+                subtitle: 'Large Size',
+                image: '/assets/cashew-w240.jpg',
+                desc: 'Large size cashew offering an ideal balance of visual size and commercial value.',
+            },
+            {
+                label: 'W320',
+                subtitle: 'Standard size',
+                image: '/assets/cashew-w320.jpg',
+                desc: 'Standard export grade, the international benchmark for bulk food service and packaging.',
+            },
+        ],
+        facts: ['White Wholes (W180, W210, W240, W320)', 'Scorched Wholes (SW)', 'Splits (JH/JK)', 'Pieces (LWP/SWP)'],
+    },
+    {
         id: 'black-pepper',
         name: 'Black Pepper',
         origin: 'Karnataka & Kerala',
@@ -162,22 +206,6 @@ const VARIETIES_DATA: ProductVarietyData[] = [
             { label: '1885 Basmati', desc: 'Modern high-yield cultivar with enhanced resistance to common crop pests and pristine kernel structure.', badge: 'Modern Hybrid' },
         ],
         facts: ['Raw / White', 'Steamed', 'Creamy Sella / Parboiled', 'Golden Sella'],
-    },
-    {
-        id: 'cashews',
-        name: 'Cashews',
-        origin: 'India',
-        badge: 'Export Graded',
-        tagline: 'Export-Quality White Whole Kernels & Splits',
-        description: 'Carefully graded, naturally rich, export-quality cashews across internationally recognized grade sizes.',
-        type: 'cards-list',
-        varieties: [
-            { label: 'W180', desc: 'King of cashews. Largest and heaviest whole kernel, premier luxury presentation.', badge: '160–180 nuts/lb' },
-            { label: 'W210', desc: 'Jumbo size whole cashew with smooth white appearance and rich natural crunch.', badge: '200–210 nuts/lb' },
-            { label: 'W240', desc: 'Large size cashew offering an ideal balance of visual size and commercial value.', badge: '220–240 nuts/lb' },
-            { label: 'W320', desc: 'Standard export grade, the international benchmark for bulk food service and packaging.', badge: '300–320 nuts/lb' },
-        ],
-        facts: ['White Wholes', 'Scorched Wholes (SW)', 'Splits (JH/JK)', 'Pieces (LWP/SWP)'],
     },
     {
         id: 'seeraga-samba-rice',
@@ -353,7 +381,6 @@ const ProductVarietiesView: React.FC<ProductVarietiesViewProps> = ({
                                 key={v.label}
                                 className="bg-[#FBF6EC] border-2 border-dashed border-[#C2A470] rounded-[2.5rem] p-7 sm:p-9 flex flex-col items-center text-center shadow-sm hover:shadow-lg transition-all duration-300 relative overflow-hidden"
                             >
-                                {/* Subtle background watermark feel */}
                                 <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-white shadow-lg mb-6 bg-white flex-shrink-0">
                                     <img src={v.image} alt={v.label} className="w-full h-full object-cover" />
                                 </div>
@@ -383,12 +410,12 @@ const ProductVarietiesView: React.FC<ProductVarietiesViewProps> = ({
                             {activeProduct.photoCards.map((v) => (
                                 <div
                                     key={v.label}
-                                    className="bg-[#FBF6EC] border-2 border-[#C2A470] rounded-[2.5rem] p-6 sm:p-8 flex flex-col items-center text-center shadow-sm hover:shadow-lg transition-all"
+                                    className="bg-[#FBF6EC] border-2 border-[#C2A470] rounded-[2.5rem] p-6 sm:p-7 flex flex-col items-center text-center shadow-sm hover:shadow-lg transition-all"
                                 >
-                                    <div className="aspect-square w-full rounded-2xl overflow-hidden mb-6 bg-white flex items-center justify-center p-4 shadow-xs">
-                                        <img src={v.image} alt={v.label} className="w-full h-full object-contain" />
+                                    <div className="w-full aspect-[4/3] sm:aspect-square rounded-2xl overflow-hidden mb-5 bg-transparent flex items-center justify-center">
+                                        <img src={v.image} alt={v.label} className="w-full h-full object-contain transform hover:scale-105 transition-transform duration-300" />
                                     </div>
-                                    <h3 className="text-2xl sm:text-3xl font-bold text-[#132644] tracking-widest uppercase font-serif">
+                                    <h3 className="text-xl sm:text-2xl font-bold text-[#132644] tracking-widest uppercase font-serif">
                                         {v.label}
                                     </h3>
                                 </div>
@@ -453,7 +480,51 @@ const ProductVarietiesView: React.FC<ProductVarietiesViewProps> = ({
                     </div>
                 )}
 
-                {/* 4. BLACK PEPPER - Table & Varieties */}
+                {/* 4. CASHEWS - Exact 2x2 Grid (Matching Image 4) */}
+                {activeProduct.type === 'cashew-grid' && activeProduct.cashewVarieties && (
+                    <div className="mb-14">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+                            {activeProduct.cashewVarieties.map((v) => (
+                                <div
+                                    key={v.label}
+                                    className="bg-[#FBF6EC] border-2 border-dashed border-[#C2A470] rounded-[2.5rem] p-7 sm:p-9 flex flex-col items-center text-center shadow-sm hover:shadow-lg transition-all duration-300 relative overflow-hidden"
+                                >
+                                    {/* Circle Image with bowl of cashews */}
+                                    <div className="w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-4 border-white shadow-lg mb-6 bg-white flex-shrink-0">
+                                        <img src={v.image} alt={v.label} className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300" />
+                                    </div>
+
+                                    {/* Title */}
+                                    <h3 className="text-2xl sm:text-3xl font-bold text-[#132644] font-serif uppercase tracking-wide mb-1">
+                                        {v.label}
+                                    </h3>
+
+                                    {/* Subtitle */}
+                                    <p className="text-slate-700 text-base sm:text-lg font-medium">
+                                        {v.subtitle}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+
+                        {activeProduct.facts && (
+                            <div className="mt-10 bg-white rounded-2xl p-6 border border-[#132644]/10 max-w-4xl mx-auto">
+                                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-3">
+                                    Available Commercial Grades &amp; Cuts:
+                                </span>
+                                <div className="flex flex-wrap gap-2">
+                                    {activeProduct.facts.map((fact) => (
+                                        <span key={fact} className="text-xs font-bold text-[#132644] bg-[#FBF6EC] border border-[#C2A470]/50 px-3.5 py-1.5 rounded-full">
+                                            {fact}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {/* 5. BLACK PEPPER - Table & Varieties */}
                 {activeProduct.type === 'pepper-table' && (
                     <div className="space-y-8 mb-14">
                         {activeProduct.table && (
@@ -491,7 +562,7 @@ const ProductVarietiesView: React.FC<ProductVarietiesViewProps> = ({
                     </div>
                 )}
 
-                {/* 5. BASMATI, CASHEWS, SEERAGA SAMBA - Cards List */}
+                {/* 6. BASMATI, SEERAGA SAMBA - Cards List */}
                 {activeProduct.type === 'cards-list' && activeProduct.varieties && (
                     <div className="space-y-8 mb-14">
                         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -536,7 +607,7 @@ const ProductVarietiesView: React.FC<ProductVarietiesViewProps> = ({
                     </div>
                 )}
 
-                {/* 6. EGGS PHOTO GRID */}
+                {/* 7. EGGS PHOTO GRID */}
                 {activeProduct.type === 'photo-grid' && activeProduct.photoCards && (
                     <div className="grid sm:grid-cols-2 gap-8 mb-14 max-w-4xl mx-auto">
                         {activeProduct.photoCards.map((v) => (

@@ -91,10 +91,7 @@ const PRODUCTS: ProductBlock[] = [
         origin: 'Chettinad Region, Tamil Nadu',
         image: '/assets/kavuni-rice-black.jpg',
         badge: 'Heritage Superfood',
-        hasVarieties: true,
-        varietiesSummary: 'Black Kavuni Rice & Red Kavuni Rice',
         description: 'A South Indian heritage grain from the Chettinad region, also known as Indian black rice. Traditionally valued for its antioxidant and fibre content.',
-        facts: ['Red Kavuni Rice', 'Black Kavuni Rice'],
     },
     {
         name: 'Basmati Rice',
