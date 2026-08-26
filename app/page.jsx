@@ -11,9 +11,11 @@ import Products from "@/components/Products";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import DetailedProductView from "@/components/DetailedProductView";
+import ProductVarietiesView from "@/components/ProductVarietiesView";
 
 export default function Home() {
   const [currentView, setCurrentView] = useState("home");
+  const [selectedProductForVarieties, setSelectedProductForVarieties] = useState("Red Chillies");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [enquiryProduct, setEnquiryProduct] = useState("");
@@ -45,6 +47,12 @@ export default function Home() {
     setIsMobileMenuOpen(false);
   };
 
+  const handleViewVarieties = (productName) => {
+    setSelectedProductForVarieties(productName || "Red Chillies");
+    setCurrentView("varieties");
+    setIsMobileMenuOpen(false);
+  };
+
   const handleEnquireProduct = (productName) => {
     setEnquiryProduct(productName);
     setCurrentView("home");
@@ -55,10 +63,30 @@ export default function Home() {
     }, 100);
   };
 
-  if (currentView === "products") {
-    return <DetailedProductView onBack={() => setCurrentView("home")} onEnquire={handleEnquireProduct} />;
+  // Dedicated Product Varieties View
+  if (currentView === "varieties") {
+    return (
+      <ProductVarietiesView
+        initialProduct={selectedProductForVarieties}
+        onBack={() => setCurrentView("products")}
+        onBackToHome={() => setCurrentView("home")}
+        onEnquire={handleEnquireProduct}
+      />
+    );
   }
 
+  // Full Catalogue View
+  if (currentView === "products") {
+    return (
+      <DetailedProductView
+        onBack={() => setCurrentView("home")}
+        onEnquire={handleEnquireProduct}
+        onViewVarieties={handleViewVarieties}
+      />
+    );
+  }
+
+  // Homepage View
   return (
     <div className="font-sans text-[#132644] bg-white">
       <Navbar
@@ -77,11 +105,14 @@ export default function Home() {
 
       <WhyUs />
 
+      <Products
+        handleExploreProducts={handleExploreProducts}
+        handleViewVarieties={handleViewVarieties}
+      />
+
       <Mission />
 
       <OurEdge />
-
-      <Products handleExploreProducts={handleExploreProducts} />
 
       <Certificates />
 
