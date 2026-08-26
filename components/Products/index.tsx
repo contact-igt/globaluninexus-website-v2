@@ -1,33 +1,34 @@
 'use client';
 
 import React from 'react';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Layers } from 'lucide-react';
 
 interface ProductsProps {
     handleExploreProducts: () => void;
+    handleViewVarieties?: (productName: string) => void;
 }
 
-const Products: React.FC<ProductsProps> = ({ handleExploreProducts }) => {
+const Products: React.FC<ProductsProps> = ({ handleExploreProducts, handleViewVarieties }) => {
     const products = [
         {
             name: 'Red Chillies',
             image: '/assets/guntur-red-chilli.webp',
-            desc: 'Teja, Sannam, Byadgi and 341 varieties from Guntur, Andhra Pradesh.'
+            desc: 'Teja (S17), Sannam (334/S4), Byadgi and 341 varieties from Guntur & Karnataka.'
         },
         {
             name: 'Turmeric',
             image: '/assets/erode-turmeric-powder.jpeg',
-            desc: 'Powder, finger and bulb forms from Erode, Tamil Nadu.'
+            desc: 'Powder, finger and bulb forms from Erode, Tamil Nadu ("Turmeric City").'
         },
         {
             name: 'Cardamom',
             image: '/assets/theni-cardamom.png',
-            desc: 'Large, small, powder and husk forms from Theni and Idukki.'
+            desc: 'Large, small, powder and husk forms from Theni and Idukki (All sizes available).'
         },
         {
             name: 'Ayakudi Guava',
             image: '/assets/guava.jpg',
-            desc: 'From the famous Palani district of Tamil Nadu.'
+            desc: 'From the famous Palani district of Tamil Nadu. Sourced with care, quality assured.'
         }
     ];
 
@@ -52,21 +53,38 @@ const Products: React.FC<ProductsProps> = ({ handleExploreProducts }) => {
 
                 <div className="grid sm:grid-cols-2 gap-8">
                     {products.map((product, idx) => (
-                        <button key={idx} className="group cursor-pointer text-left" onClick={handleExploreProducts}>
-                            <div className="relative overflow-hidden rounded-xl mb-4 aspect-[4/3] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                        <div key={idx} className="group text-left bg-white rounded-2xl overflow-hidden border border-[#132644]/10 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
+                            <div className="relative overflow-hidden aspect-[4/3]">
                                 <img
                                     src={product.image}
                                     alt={product.name}
                                     className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#132644]/90 via-[#132644]/10 to-transparent"></div>
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#132644]/90 via-[#132644]/15 to-transparent"></div>
 
                                 <div className="absolute bottom-0 left-0 p-6 w-full">
-                                    <h4 className="text-white text-xl font-bold mb-1 font-serif">{product.name}</h4>
+                                    <h4 className="text-white text-2xl font-bold mb-1 font-serif">{product.name}</h4>
                                     <p className="text-[#C2A470] text-sm font-medium">{product.desc}</p>
                                 </div>
                             </div>
-                        </button>
+
+                            <div className="p-4 bg-white flex items-center justify-between gap-3 border-t border-slate-100">
+                                <button
+                                    onClick={() => handleViewVarieties ? handleViewVarieties(product.name) : handleExploreProducts()}
+                                    className="bg-[#C2A470] hover:bg-[#a9855a] text-[#132644] px-4 py-2 rounded-full font-bold text-xs sm:text-sm transition-all flex items-center gap-1.5 shadow-xs"
+                                >
+                                    <Layers className="w-4 h-4" />
+                                    <span>View Varieties</span>
+                                </button>
+                                <button
+                                    onClick={handleExploreProducts}
+                                    className="text-[#132644] hover:text-[#8a6f3f] font-semibold text-xs sm:text-sm flex items-center gap-1 transition-colors"
+                                >
+                                    <span>Details</span>
+                                    <ChevronRight className="w-4 h-4" />
+                                </button>
+                            </div>
+                        </div>
                     ))}
                 </div>
             </div>
