@@ -43,6 +43,15 @@ interface VarietyItem {
     badge?: string;
 }
 
+interface RiceVariety {
+    label: string;
+    subtitle: string;
+    image: string;
+    desc: string;
+    badge?: string;
+    specs: string;
+}
+
 interface ProductVarietyData {
     id: string;
     name: string;
@@ -51,9 +60,10 @@ interface ProductVarietyData {
     tagline?: string;
     badge?: string;
     description: string;
-    type: 'chilli-grid' | 'turmeric-row' | 'cardamom-grid' | 'cashew-grid' | 'pepper-table' | 'cards-list' | 'photo-grid';
+    type: 'chilli-grid' | 'turmeric-row' | 'cardamom-grid' | 'cashew-grid' | 'pepper-table' | 'cards-list' | 'photo-grid' | 'rice-grid';
     chilliVarieties?: ChilliVariety[];
     cashewVarieties?: CashewVariety[];
+    riceVarieties?: RiceVariety[];
     photoCards?: PhotoCard[];
     varieties?: VarietyItem[];
     facts?: string[];
@@ -198,29 +208,41 @@ const VARIETIES_DATA: ProductVarietyData[] = [
         origin: 'Himalayan Foothills',
         badge: 'GI Protected',
         tagline: 'Extra-Long Grain Aromatic Heritage Rice',
-        description: 'Grown in the fertile foothills of the Himalayas. Extra-long slender grains that elongate up to 2.5x upon cooking with delicate, natural vintage aroma.',
-        type: 'cards-list',
-        varieties: [
-            { label: '1121 Basmati', desc: 'World-renowned extra-long grain (8.35mm+), exceptional cooked elongation, ideal for premium luxury biryani.', badge: 'Extra-Long Grain' },
-            { label: '1509 Basmati', desc: 'Faster crop cycles and improved water efficiency, high yield with exquisite cooking fragrance.', badge: 'Long Slender' },
-            { label: '1885 Basmati', desc: 'Modern high-yield cultivar with enhanced resistance to common crop pests and pristine kernel structure.', badge: 'Modern Hybrid' },
+        description: 'Grown in the fertile foothills of the Himalayas nurtured by mineral-rich glacier waters. Celebrated globally for exceptional grain elongation, non-sticky fluffiness, and distinct vintage aroma.',
+        type: 'rice-grid',
+        riceVarieties: [
+            {
+                label: '1126 Basmati',
+                subtitle: 'Flagship Extra-Long Grain',
+                image: '/assets/1126.png',
+                badge: 'Extra-Long Grain (8.35mm+)',
+                desc: 'World-renowned extra-long slender basmati (8.35mm+ raw length). Elongates dramatically up to 20–22mm upon cooking with pristine pearly finish, non-sticky separation, and captivating vintage fragrance. The gold standard for luxury biryanis and gourmet dining.',
+                specs: 'Raw Length: 8.35mm+ | Cooked: ~20–22mm | Elongation: Up to 2.5x',
+            },
+            {
+                label: '1509 Basmati',
+                subtitle: 'Long Slender Fragrant Grain',
+                image: '/assets/1509.png',
+                badge: 'Long Slender Grain',
+                desc: 'Elite early-maturing cultivar prized for its elegant long slender grains, tender cooked texture, and delicate floral aroma. Known for fast cooking time and exceptional head-rice recovery in commercial culinary operations.',
+                specs: 'Raw Length: 8.40mm | Cooked: ~18–19mm | Delicate Floral Aroma',
+            },
+            {
+                label: '1885 Basmati',
+                subtitle: 'Next-Gen Elite Cultivar',
+                image: '/assets/1885.png',
+                badge: 'Modern Elite Cultivar',
+                desc: 'Advanced hybrid cultivar engineered for superior grain strength and disease resistance while retaining traditional basmati taste. Delivers pristine kernel uniformity, excellent elongation, and rich aroma for export retail packaging.',
+                specs: 'Raw Length: 8.30mm+ | Cooked: ~19–20mm | High Purity Grade',
+            },
         ],
-        facts: ['Raw / White', 'Steamed', 'Creamy Sella / Parboiled', 'Golden Sella'],
-    },
-    {
-        id: 'seeraga-samba-rice',
-        name: 'Seeraga Samba Rice',
-        origin: 'Cauvery Delta, Tamil Nadu',
-        badge: 'GI Tagged Heritage',
-        tagline: 'Tiny Aromatic Grains for Authentic South Indian Biryanis',
-        description: 'A premium, tiny-grained, aromatic South Indian rice variety and a traditional Tamil Nadu delta heritage grain. Its unique porous starch texture absorbs rich seasonings and broths deeply, and it is preferred for easy digestion.',
-        type: 'cards-list',
-        varieties: [
-            { label: 'Aged Seeraga Samba', desc: 'Naturally aged for 12+ months to achieve non-sticky fluffiness and distinct floral aroma.', badge: 'Aged 12M+' },
-            { label: 'Polished Raw Samba', desc: 'Milled to an appealing pearl finish while retaining core fragrance and non-sticky cooking.', badge: 'Pearl Finish' },
-            { label: 'Mappillai Samba (Bridegroom Rice)', desc: 'Ancient red heritage rice high in iron, zinc, and dietary fiber for vitality.', badge: 'Red Heritage' },
+        facts: [
+            'Raw / White Basmati',
+            'Steam Basmati',
+            'Creamy Sella (Parboiled)',
+            'Golden Sella Basmati',
+            'Broken Grades (Tibar / Dubar)',
         ],
-        facts: ['Traditional / Organic', 'Aged Samba', 'Polished Samba', 'Unpolished Samba'],
     },
     {
         id: 'eggs',
@@ -562,7 +584,126 @@ const ProductVarietiesView: React.FC<ProductVarietiesViewProps> = ({
                     </div>
                 )}
 
-                {/* 6. BASMATI, SEERAGA SAMBA - Cards List */}
+                {/* 6. BASMATI RICE - 3-Card Rice Grid (1126, 1509, 1885) */}
+                {activeProduct.type === 'rice-grid' && activeProduct.riceVarieties && (
+                    <div className="space-y-10 mb-14">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                            {activeProduct.riceVarieties.map((v) => (
+                                <div
+                                    key={v.label}
+                                    className="bg-[#FBF6EC] border-2 border-dashed border-[#C2A470] rounded-[2.5rem] p-7 sm:p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden group hover:-translate-y-1"
+                                >
+                                    {/* Badge at top */}
+                                    {v.badge && (
+                                        <div className="mb-4">
+                                            <span className="text-[11px] font-bold uppercase tracking-wider bg-[#132644] text-[#C2A470] px-3.5 py-1 rounded-full shadow-2xs border border-[#C2A470]/30">
+                                                {v.badge}
+                                            </span>
+                                        </div>
+                                    )}
+
+                                    {/* Circular Rice Bowl Image */}
+                                    <div className="w-44 h-44 sm:w-52 sm:h-52 rounded-full overflow-hidden border-4 border-white shadow-xl mb-6 bg-white flex-shrink-0 relative group-hover:scale-105 transition-transform duration-500">
+                                        <img
+                                            src={v.image}
+                                            alt={v.label}
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+
+                                    {/* Title */}
+                                    <h3 className="text-2xl sm:text-3xl font-bold text-[#132644] font-serif uppercase tracking-wide mb-1">
+                                        {v.label}
+                                    </h3>
+
+                                    {/* Subtitle */}
+                                    {v.subtitle && (
+                                        <p className="text-[#8a6f3f] text-sm font-semibold mb-3">
+                                            {v.subtitle}
+                                        </p>
+                                    )}
+
+                                    {/* Description */}
+                                    <p className="text-slate-700 text-sm leading-relaxed mb-6 flex-1">
+                                        {v.desc}
+                                    </p>
+
+                                    {/* Technical Specs Footer */}
+                                    {v.specs && (
+                                        <div className="pt-4 border-t border-[#C2A470]/40 w-full">
+                                            <p className="text-[#8a6f3f] font-serif text-xs sm:text-sm font-semibold italic">
+                                                {v.specs}
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Processing Forms & Grades */}
+                        {activeProduct.facts && (
+                            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#132644]/10 shadow-xs">
+                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5 pb-4 border-b border-slate-100">
+                                    <div>
+                                        <h4 className="text-base font-bold text-[#132644] uppercase tracking-wider font-serif flex items-center gap-2">
+                                            <Sparkles className="w-4 h-4 text-[#8a6f3f]" />
+                                            Available Processing Forms &amp; Milling Cuts
+                                        </h4>
+                                        <p className="text-xs text-slate-500 mt-0.5">
+                                            Tailored milling and moisture control according to destination country specifications
+                                        </p>
+                                    </div>
+                                    <span className="text-[11px] font-bold text-[#8a6f3f] bg-[#FBF6EC] border border-[#C2A470]/40 px-3 py-1 rounded-full w-fit">
+                                        100% Sortex Cleaned
+                                    </span>
+                                </div>
+
+                                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                                    {activeProduct.facts.map((fact) => (
+                                        <div
+                                            key={fact}
+                                            className="flex items-center justify-center text-center text-xs sm:text-sm font-bold text-[#132644] bg-[#FBF6EC] border border-[#C2A470]/50 p-3 rounded-2xl hover:bg-[#132644] hover:text-[#C2A470] hover:border-[#132644] transition-all"
+                                        >
+                                            {fact}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Quality Benchmark Parameters */}
+                        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#132644]/10 shadow-xs">
+                            <h4 className="text-base font-bold text-[#132644] uppercase tracking-wider font-serif mb-4 flex items-center gap-2">
+                                <ShieldCheck className="w-4 h-4 text-[#8a6f3f]" />
+                                Basmati Export Quality Benchmark
+                            </h4>
+                            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div className="bg-[#FBF6EC] p-4 rounded-2xl border border-[#C2A470]/30">
+                                    <div className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Avg. Raw Grain Length</div>
+                                    <div className="text-lg sm:text-xl font-bold text-[#132644] font-serif mt-1">8.30 – 8.45 mm</div>
+                                    <div className="text-xs text-[#8a6f3f] font-medium mt-0.5">Extra-long slender grade</div>
+                                </div>
+                                <div className="bg-[#FBF6EC] p-4 rounded-2xl border border-[#C2A470]/30">
+                                    <div className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Elongation Ratio</div>
+                                    <div className="text-lg sm:text-xl font-bold text-[#132644] font-serif mt-1">2.0x – 2.5x</div>
+                                    <div className="text-xs text-[#8a6f3f] font-medium mt-0.5">Non-sticky fluffy expansion</div>
+                                </div>
+                                <div className="bg-[#FBF6EC] p-4 rounded-2xl border border-[#C2A470]/30">
+                                    <div className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Moisture Content</div>
+                                    <div className="text-lg sm:text-xl font-bold text-[#132644] font-serif mt-1">&lt; 12.0% Max</div>
+                                    <div className="text-xs text-[#8a6f3f] font-medium mt-0.5">Long sea transit stability</div>
+                                </div>
+                                <div className="bg-[#FBF6EC] p-4 rounded-2xl border border-[#C2A470]/30">
+                                    <div className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Purity Standard</div>
+                                    <div className="text-lg sm:text-xl font-bold text-[#132644] font-serif mt-1">95% Pure Basmati</div>
+                                    <div className="text-xs text-[#8a6f3f] font-medium mt-0.5">DNA certified &amp; sortexed</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Generic Cards List (Fallback) */}
                 {activeProduct.type === 'cards-list' && activeProduct.varieties && (
                     <div className="space-y-8 mb-14">
                         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

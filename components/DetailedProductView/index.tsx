@@ -81,10 +81,7 @@ const PRODUCTS: ProductBlock[] = [
         origin: 'Tamil Nadu Delta',
         image: '/assets/seevaga-samba-rice.png',
         badge: 'GI Tagged',
-        hasVarieties: true,
-        varietiesSummary: 'Aged Samba, Polished, Unpolished & Mappillai Samba',
         description: 'A premium, tiny-grained, aromatic South Indian rice variety and a traditional Tamil Nadu delta rice. Its unique texture aids in absorbing rich spices deeply, and it is preferred for easier digestion.',
-        facts: ['Traditional / Organic', 'Aged Samba', 'Polished Samba', 'Unpolished Samba'],
     },
     {
         name: 'Kavuni Rice',
@@ -99,9 +96,9 @@ const PRODUCTS: ProductBlock[] = [
         image: '/assets/basmati-rice.jpg',
         badge: 'GI Protected',
         hasVarieties: true,
-        varietiesSummary: '1121 Basmati, 1509 Basmati & 1885 Basmati',
+        varietiesSummary: '1126 Basmati, 1509 Basmati & 1885 Basmati',
         description: 'Long-grain, aromatic rice grown in specific geographical areas of the Himalayan foothills.',
-        facts: ['Raw / White', 'Steamed', 'Sella / Parboiled'],
+        facts: ['Raw / White', 'Steamed', 'Sella / Parboiled', 'Golden Sella'],
     },
     {
         name: 'Cashews',
