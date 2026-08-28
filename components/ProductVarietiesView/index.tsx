@@ -29,6 +29,7 @@ interface CashewVariety {
     subtitle: string;
     image: string;
     desc?: string;
+    imageClass?: string;
 }
 
 interface PhotoCard {
@@ -65,6 +66,7 @@ interface ProductVarietyData {
     cashewVarieties?: CashewVariety[];
     riceVarieties?: RiceVariety[];
     photoCards?: PhotoCard[];
+    formCards?: PhotoCard[];
     varieties?: VarietyItem[];
     facts?: string[];
     table?: {
@@ -119,15 +121,44 @@ const VARIETIES_DATA: ProductVarietyData[] = [
         description: 'Renowned worldwide for its high natural curcumin content, deep golden hue, and potent antimicrobial aroma. Sourced from the regulated agricultural markets of Erode and surrounding belts.',
         type: 'turmeric-row',
         photoCards: [
-            { label: 'POWDER', image: '/assets/turmeric-powder.jpg' },
-            { label: 'FINGER', image: '/assets/turmeric-finger.jpg' },
-            { label: 'BULB', image: '/assets/turmeric-bulb.jpg' },
+            {
+                label: 'COMMERCIAL',
+                subtitle: 'Conventional Grade • Double Polished',
+                image: '/assets/commercial.png',
+            },
+            {
+                label: 'IPM',
+                subtitle: 'Pesticide Controlled • EU / US MRL Compliant',
+                image: '/assets/ipm.png',
+            },
+            {
+                label: 'ORGANIC',
+                subtitle: '100% Chemical-Free • Certified Organic',
+                image: '/assets/organic.png',
+            },
+        ],
+        formCards: [
+            {
+                label: 'POWDER',
+                subtitle: '100% Pure Fine Ground 100–120 Mesh',
+                image: '/assets/turmeric-powder.jpg',
+            },
+            {
+                label: 'FINGER',
+                subtitle: 'Double & Single Polished Whole Fingers',
+                image: '/assets/turmeric-finger.jpg',
+            },
+            {
+                label: 'BULB',
+                subtitle: 'High Curcumin Whole Round Bulbs (Gatha)',
+                image: '/assets/turmeric-bulb.jpg',
+            },
         ],
         facts: [
             'Curcumin Range: 3.0% – 5.0%+',
             'Double Polished & Single Polished Fingers',
             'Low Moisture (<10%) for Long Transit Stability',
-            'Certified Free from Artificial Colorants / Lead Chromate',
+            'Certified Free from Artificial Colorants & Lead Chromate',
         ],
     },
     {
@@ -170,6 +201,7 @@ const VARIETIES_DATA: ProductVarietyData[] = [
                 subtitle: 'Large Size',
                 image: '/assets/cashew-w240.jpg',
                 desc: 'Large size cashew offering an ideal balance of visual size and commercial value.',
+                imageClass: 'scale-115 translate-x-4',
             },
             {
                 label: 'W320',
@@ -253,7 +285,7 @@ const VARIETIES_DATA: ProductVarietyData[] = [
         type: 'photo-grid',
         photoCards: [
             { label: 'WHITE EGGS', subtitle: 'Export Table Eggs (50g–60g)', image: '/assets/eggs-white.jpg' },
-            { label: 'BROWN EGGS', subtitle: 'Free-Range Farm Fresh', image: '/assets/eggs-brown.jpg' },
+            { label: 'BROWN EGGS', subtitle: 'Free-Range Farm Fresh', image: '/assets/brown-eggs.png' },
         ],
     },
 ];
@@ -425,24 +457,78 @@ const ProductVarietiesView: React.FC<ProductVarietiesViewProps> = ({
                     </div>
                 )}
 
-                {/* 2. TURMERIC - Exact 3-Card Row (Matching Image 2) */}
-                {activeProduct.type === 'turmeric-row' && activeProduct.photoCards && (
-                    <div className="mb-14">
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
-                            {activeProduct.photoCards.map((v) => (
-                                <div
-                                    key={v.label}
-                                    className="bg-[#FBF6EC] border-2 border-[#C2A470] rounded-[2.5rem] p-6 sm:p-7 flex flex-col items-center text-center shadow-sm hover:shadow-lg transition-all"
-                                >
-                                    <div className="w-full aspect-[4/3] sm:aspect-square rounded-2xl overflow-hidden mb-5 bg-transparent flex items-center justify-center">
-                                        <img src={v.image} alt={v.label} className="w-full h-full object-contain transform hover:scale-105 transition-transform duration-300" />
-                                    </div>
-                                    <h3 className="text-xl sm:text-2xl font-bold text-[#132644] tracking-widest uppercase font-serif">
-                                        {v.label}
-                                    </h3>
+                {/* 2. TURMERIC - Variety Grades & Processing Forms */}
+                {activeProduct.type === 'turmeric-row' && (
+                    <div className="space-y-12 mb-14">
+                        {/* Quality & Cultivation Grades (Commercial, IPM, Organic) */}
+                        {activeProduct.photoCards && (
+                            <div>
+                                <div className="text-center mb-8">
+                                    <span className="text-xs font-bold text-[#8a6f3f] uppercase tracking-widest bg-white px-4 py-1.5 rounded-full border border-[#C2A470]/30 shadow-xs inline-block mb-2">
+                                        Cultivation &amp; Sourcing Grades
+                                    </span>
+                                    <h2 className="text-2xl sm:text-3xl font-bold text-[#132644] font-serif">
+                                        Quality &amp; Compliance Varieties
+                                    </h2>
                                 </div>
-                            ))}
-                        </div>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
+                                    {activeProduct.photoCards.map((v) => (
+                                        <div
+                                            key={v.label}
+                                            className="bg-[#FBF6EC] border-2 border-dashed border-[#C2A470] rounded-[2.5rem] p-6 sm:p-7 flex flex-col items-center text-center shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-1"
+                                        >
+                                            <div className="w-44 h-44 sm:w-52 sm:h-52 rounded-full overflow-hidden border-4 border-white shadow-lg mb-5 bg-white flex-shrink-0 relative group-hover:scale-105 transition-transform duration-500">
+                                                <img src={v.image} alt={v.label} className="w-full h-full object-cover" />
+                                            </div>
+                                            <h3 className="text-xl sm:text-2xl font-bold text-[#132644] tracking-wider uppercase font-serif">
+                                                {v.label}
+                                            </h3>
+                                            {v.subtitle && (
+                                                <p className="text-[#8a6f3f] text-xs sm:text-sm mt-1.5 font-semibold">
+                                                    {v.subtitle}
+                                                </p>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* Physical Processing Forms (Powder, Finger, Bulb) */}
+                        {activeProduct.formCards && (
+                            <div>
+                                <div className="text-center mb-8">
+                                    <span className="text-xs font-bold text-[#8a6f3f] uppercase tracking-widest bg-white px-4 py-1.5 rounded-full border border-[#C2A470]/30 shadow-xs inline-block mb-2">
+                                        Available Product Forms
+                                    </span>
+                                    <h2 className="text-2xl sm:text-3xl font-bold text-[#132644] font-serif">
+                                        Processing Forms &amp; Cuts
+                                    </h2>
+                                </div>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8">
+                                    {activeProduct.formCards.map((v) => (
+                                        <div
+                                            key={v.label}
+                                            className="bg-[#FBF6EC] border-2 border-[#C2A470] rounded-[2.5rem] p-6 sm:p-7 flex flex-col items-center text-center shadow-sm hover:shadow-lg transition-all"
+                                        >
+                                            <div className="w-full aspect-[4/3] sm:aspect-square rounded-2xl overflow-hidden mb-5 bg-transparent flex items-center justify-center">
+                                                <img src={v.image} alt={v.label} className="w-full h-full object-contain transform hover:scale-105 transition-transform duration-300" />
+                                            </div>
+                                            <h3 className="text-xl sm:text-2xl font-bold text-[#132644] tracking-widest uppercase font-serif">
+                                                {v.label}
+                                            </h3>
+                                            {v.subtitle && (
+                                                <p className="text-slate-600 text-xs sm:text-sm mt-1.5 font-medium">
+                                                    {v.subtitle}
+                                                </p>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
 
                         {activeProduct.facts && (
                             <div className="mt-8 bg-white rounded-2xl p-6 border border-[#132644]/10 shadow-xs">
@@ -509,11 +595,15 @@ const ProductVarietiesView: React.FC<ProductVarietiesViewProps> = ({
                             {activeProduct.cashewVarieties.map((v) => (
                                 <div
                                     key={v.label}
-                                    className="bg-[#FBF6EC] border-2 border-dashed border-[#C2A470] rounded-[2.5rem] p-7 sm:p-9 flex flex-col items-center text-center shadow-sm hover:shadow-lg transition-all duration-300 relative overflow-hidden"
+                                    className="group bg-[#FBF6EC] border-2 border-dashed border-[#C2A470] rounded-[2.5rem] p-7 sm:p-9 flex flex-col items-center text-center shadow-sm hover:shadow-lg transition-all duration-300 relative overflow-hidden"
                                 >
                                     {/* Circle Image with bowl of cashews */}
-                                    <div className="w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-4 border-white shadow-lg mb-6 bg-white flex-shrink-0">
-                                        <img src={v.image} alt={v.label} className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300" />
+                                    <div className="w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-4 border-white shadow-lg mb-6 bg-white flex-shrink-0 relative">
+                                        <img
+                                            src={v.image}
+                                            alt={v.label}
+                                            className={`w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 ${v.imageClass ? `${v.imageClass} group-hover:scale-120` : ''}`}
+                                        />
                                     </div>
 
                                     {/* Title */}
@@ -750,20 +840,22 @@ const ProductVarietiesView: React.FC<ProductVarietiesViewProps> = ({
 
                 {/* 7. EGGS PHOTO GRID */}
                 {activeProduct.type === 'photo-grid' && activeProduct.photoCards && (
-                    <div className="grid sm:grid-cols-2 gap-8 mb-14 max-w-4xl mx-auto">
+                    <div className="grid sm:grid-cols-2 gap-6 sm:gap-8 mb-14 max-w-4xl mx-auto">
                         {activeProduct.photoCards.map((v) => (
                             <div
                                 key={v.label}
-                                className="bg-[#FBF6EC] border-2 border-[#C2A470] rounded-3xl p-6 flex flex-col items-center text-center shadow-sm"
+                                className="group bg-[#FBF6EC] border-2 border-dashed border-[#C2A470] rounded-[2.5rem] p-7 sm:p-9 flex flex-col items-center text-center shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden hover:-translate-y-1"
                             >
-                                <div className="aspect-square w-full rounded-2xl overflow-hidden mb-5 bg-white shadow-xs">
+                                <div className="w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-4 border-white shadow-lg mb-6 bg-white flex-shrink-0 relative group-hover:scale-105 transition-transform duration-500">
                                     <img src={v.image} alt={v.label} className="w-full h-full object-cover" />
                                 </div>
-                                <h3 className="text-xl sm:text-2xl font-bold text-[#132644] font-serif uppercase mb-1">
+                                <h3 className="text-2xl sm:text-3xl font-bold text-[#132644] font-serif uppercase tracking-wide mb-1.5">
                                     {v.label}
                                 </h3>
                                 {v.subtitle && (
-                                    <p className="text-slate-600 text-sm font-medium">{v.subtitle}</p>
+                                    <p className="text-[#8a6f3f] text-sm sm:text-base font-semibold">
+                                        {v.subtitle}
+                                    </p>
                                 )}
                             </div>
                         ))}

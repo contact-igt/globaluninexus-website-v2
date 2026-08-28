@@ -24,11 +24,6 @@ interface ProductBlock {
     varietiesSummary?: string;
     description: string;
     facts?: string[];
-    table?: {
-        rows: { attribute: string; a: string; b: string }[];
-        colA: string;
-        colB: string;
-    };
 }
 
 const PRODUCTS: ProductBlock[] = [
@@ -47,7 +42,7 @@ const PRODUCTS: ProductBlock[] = [
         image: '/assets/erode-turmeric-powder.jpeg',
         badge: 'GI Tagged',
         hasVarieties: true,
-        varietiesSummary: 'Powder, Double-Polished Finger & Bulb',
+        varietiesSummary: 'Commercial, IPM & Organic (Fingers, Bulbs & Powder)',
         description: "Famous Erode turmeric from Tamil Nadu, known as the “Turmeric City of India.” High curcumin content, bright golden colour and strong aroma.",
     },
     {
@@ -66,22 +61,13 @@ const PRODUCTS: ProductBlock[] = [
         hasVarieties: true,
         varietiesSummary: 'Tellicherry Extra Bold (TGSEB) & Malabar Garbled (MG1)',
         description: 'Premium quality black pepper sourced from the renowned growing regions of Karnataka and Kerala. Carefully selected for rich aroma, strong pungency and superior quality. All sizes available.',
-        table: {
-            colA: 'Karnataka',
-            colB: 'Kerala',
-            rows: [
-                { attribute: 'Aroma', a: 'Mild to moderate', b: 'Strong & complex' },
-                { attribute: 'Oil Content', a: 'Moderate', b: 'Higher' },
-                { attribute: 'Pungency', a: 'Good', b: 'Higher' },
-            ],
-        },
     },
     {
         name: 'Seeraga Samba Rice',
         origin: 'Tamil Nadu Delta',
         image: '/assets/seevaga-samba-rice.png',
         badge: 'GI Tagged',
-        description: 'A premium, tiny-grained, aromatic South Indian rice variety and a traditional Tamil Nadu delta rice. Its unique texture aids in absorbing rich spices deeply, and it is preferred for easier digestion.',
+        description: 'A premium tiny-grained, aromatic South Indian rice variety. Its unique texture aids in absorbing rich spices deeply — preferred for its rice and easier digestion.',
     },
     {
         name: 'Kavuni Rice',
@@ -143,11 +129,10 @@ const PRODUCTS: ProductBlock[] = [
 
 const Tag: React.FC<{ children: React.ReactNode; muted?: boolean }> = ({ children, muted }) => (
     <span
-        className={`text-[11px] font-bold px-3 py-1 rounded-full border whitespace-nowrap ${
-            muted
+        className={`text-[11px] font-bold px-3 py-1 rounded-full border whitespace-nowrap ${muted
                 ? 'bg-transparent text-[#132644]/70 border-[#132644]/15'
                 : 'bg-[#132644]/[0.04] text-[#132644] border-[#132644]/10'
-        }`}
+            }`}
     >
         {children}
     </span>
@@ -197,23 +182,6 @@ const ProductCard: React.FC<{
                 </div>
             )}
 
-            {/* Table if present (e.g. Pepper) */}
-            {product.table && (
-                <div className="mb-4 rounded-xl border border-[#132644]/10 overflow-hidden text-xs">
-                    <div className="grid grid-cols-3 bg-[#132644]/[0.05] font-bold text-[#132644] uppercase p-2 text-[10px]">
-                        <div>Attribute</div>
-                        <div>{product.table.colA}</div>
-                        <div>{product.table.colB}</div>
-                    </div>
-                    {product.table.rows.map((r) => (
-                        <div key={r.attribute} className="grid grid-cols-3 p-2 border-t border-slate-100 text-xs">
-                            <span className="font-semibold text-[#8a6f3f]">{r.attribute}</span>
-                            <span className="text-slate-600">{r.a}</span>
-                            <span className="text-slate-600">{r.b}</span>
-                        </div>
-                    ))}
-                </div>
-            )}
 
             {/* Fact tags if present */}
             {product.facts && (
