@@ -30,6 +30,8 @@ interface CashewVariety {
     image: string;
     desc?: string;
     imageClass?: string;
+    category?: 'wholes' | 'scorched' | 'splits' | 'pieces';
+    countPerLb?: string;
 }
 
 interface PhotoCard {
@@ -179,38 +181,250 @@ const VARIETIES_DATA: ProductVarietyData[] = [
         id: 'cashews',
         name: 'Cashews',
         origin: 'India',
-        badge: 'Export Graded',
-        tagline: 'Export-Quality White Whole Kernels & Grade Sizes',
-        description: 'Carefully graded, naturally rich, export-quality cashews across internationally recognized grade sizes (W180, W210, W240, W320). Sourced directly from certified processing hubs.',
+        badge: 'Export Graded (28 Grades)',
+        tagline: 'Export-Quality White Wholes, Scorched Grades, Splits & Cleaned Pieces',
+        description: 'Comprehensive export portfolio covering all 28 recognized international cashew grades — from super-jumbo White Wholes (W180–W450) and rich Scorched Wholes to culinary Splits, Butts, Large White Pieces (LWP), Small Pieces (SWP), and Cleaned Baby Bits (BB1). Sourced directly from certified processing hubs in Kollam, Mangalore, and Panruti.',
         type: 'cashew-grid',
         cashewVarieties: [
+            // White Wholes (WW / CW)
             {
                 label: 'W180',
                 subtitle: 'King of Cashews',
                 image: '/assets/cashew-w180.jpg',
-                desc: 'Largest whole kernel grade (160–180 nuts/lb). Luxurious presentation with rich crunch.',
+                desc: 'Largest whole kernel grade (160–180 nuts/lb). Luxurious presentation with rich crunch, ideal for elite gifting and retail.',
+                category: 'wholes',
+                countPerLb: '160–180 / lb',
             },
             {
                 label: 'W210',
                 subtitle: 'Jumbo Size',
                 image: '/assets/cashew-w210.jpg',
-                desc: 'Jumbo size whole cashew with smooth white appearance and rich natural crunch.',
+                desc: 'Jumbo size whole cashew (200–210 nuts/lb) with smooth white appearance and rich natural crunch.',
+                category: 'wholes',
+                countPerLb: '200–210 / lb',
             },
             {
                 label: 'W240',
                 subtitle: 'Large Size',
                 image: '/assets/cashew-w240.jpg',
-                desc: 'Large size cashew offering an ideal balance of visual size and commercial value.',
+                desc: 'Large size cashew (220–240 nuts/lb) offering an ideal balance of visual size, crunch, and commercial value.',
                 imageClass: 'scale-115 translate-x-4',
+                category: 'wholes',
+                countPerLb: '220–240 / lb',
+            },
+            {
+                label: 'CW240',
+                subtitle: 'Commercial White 240',
+                image: '/assets/cashew-w240.jpg',
+                desc: 'Commercial grade white whole kernels (220–240 count/lb) with slight natural color variation for retail repacking.',
+                category: 'wholes',
+                countPerLb: '220–240 / lb',
             },
             {
                 label: 'W320',
-                subtitle: 'Standard size',
+                subtitle: 'Standard Export Grade',
                 image: '/assets/cashew-w320.jpg',
-                desc: 'Standard export grade, the international benchmark for bulk food service and packaging.',
+                desc: 'Standard export grade (300–320 nuts/lb), the global benchmark for bulk packaging, roasting, and food service.',
+                category: 'wholes',
+                countPerLb: '300–320 / lb',
+            },
+            {
+                label: 'CW320',
+                subtitle: 'Commercial White 320',
+                image: '/assets/cashew-w320.jpg',
+                desc: 'Commercial white wholes (300–320 count/lb). Economical whole cashew grade for FMCG packaging and sweet makers.',
+                category: 'wholes',
+                countPerLb: '300–320 / lb',
+            },
+            {
+                label: 'W450',
+                subtitle: 'Small Whole Grade',
+                image: '/assets/cashews.jpg',
+                desc: 'Small whole cashew kernels (400–450 nuts/lb). Highly popular for chocolate coatings, snack mixes, and baking.',
+                category: 'wholes',
+                countPerLb: '400–450 / lb',
+            },
+            {
+                label: 'CW450',
+                subtitle: 'Commercial White 450',
+                image: '/assets/cashews.jpg',
+                desc: 'Commercial small whole kernels (400–450 count/lb), maximizing nut count per packaging unit at high value.',
+                category: 'wholes',
+                countPerLb: '400–450 / lb',
+            },
+
+            // Scorched Wholes & Dessert Wholes
+            {
+                label: 'SW240',
+                subtitle: 'Scorched Wholes 240',
+                image: '/assets/cashew-scorched.jpg',
+                desc: 'Large whole kernels (220–240 count/lb) with a natural golden-toasted hue from drying. Deep roasted flavor profile.',
+                category: 'scorched',
+                countPerLb: '220–240 / lb',
+            },
+            {
+                label: 'SW320',
+                subtitle: 'Scorched Wholes 320',
+                image: '/assets/cashew-scorched.jpg',
+                desc: 'Standard size scorched whole kernels (300–320 count/lb). Perfect for flavored snack seasonings and bakery products.',
+                category: 'scorched',
+                countPerLb: '300–320 / lb',
+            },
+            {
+                label: 'SW450',
+                subtitle: 'Scorched Wholes 450',
+                image: '/assets/cashew-scorched.jpg',
+                desc: 'Small whole scorched cashews (400–450 count/lb) offering intense nutty taste for trail mixes and industrial baking.',
+                category: 'scorched',
+                countPerLb: '400–450 / lb',
+            },
+            {
+                label: 'DW',
+                subtitle: 'Dessert Wholes',
+                image: '/assets/cashew-scorched.jpg',
+                desc: 'Deeply roasted or speckled whole kernels with robust flavor, specially selected for gourmet confectionery and desserts.',
+                category: 'scorched',
+                countPerLb: 'Assorted Wholes',
+            },
+            {
+                label: 'SSW',
+                subtitle: 'Slightly Scorched Wholes',
+                image: '/assets/cashew-scorched.jpg',
+                desc: 'Whole kernels with slight light-brown surface tint, maintaining unbroken whole shape and natural crunch.',
+                category: 'scorched',
+                countPerLb: 'Assorted Wholes',
+            },
+
+            // Splits, Halves & Butts
+            {
+                label: 'FB',
+                subtitle: 'Fancy Butts',
+                image: '/assets/cashew-splits.jpg',
+                desc: 'Kernels broken cleanly across the middle (transversely). Plump white appearance, optimal for cooking and sweets.',
+                category: 'splits',
+                countPerLb: 'Transverse Halves',
+            },
+            {
+                label: 'JH',
+                subtitle: 'Jumbo Halves / Splits',
+                image: '/assets/cashew-splits.jpg',
+                desc: 'Kernels cleanly split lengthwise into two distinct halves. Premium visual presentation for gourmet garnishing.',
+                category: 'splits',
+                countPerLb: 'Lengthwise Halves',
+            },
+            {
+                label: 'FS',
+                subtitle: 'Fancy Splits',
+                image: '/assets/cashew-splits.jpg',
+                desc: 'White kernels split lengthwise into halves, completely undamaged. Widely exported for food service and packaging.',
+                category: 'splits',
+                countPerLb: 'Lengthwise Halves',
+            },
+            {
+                label: 'FS-S',
+                subtitle: 'Fancy Splits Scorched',
+                image: '/assets/cashew-splits.jpg',
+                desc: 'Lengthwise split cashew halves with light golden scorching, delivering toasted crunch for curry gravies and baking.',
+                category: 'splits',
+                countPerLb: 'Scorched Halves',
+            },
+            {
+                label: 'SB',
+                subtitle: 'Scorched Butts',
+                image: '/assets/cashew-splits.jpg',
+                desc: 'Transversely broken cashew halves with a golden roast tint, offering rich aroma in commercial food formulations.',
+                category: 'splits',
+                countPerLb: 'Scorched Butts',
+            },
+            {
+                label: 'SS',
+                subtitle: 'Scorched Splits',
+                image: '/assets/cashew-splits.jpg',
+                desc: 'Lengthwise split cashew halves with scorched color, providing an economical ingredient for snack bars and sauces.',
+                category: 'splits',
+                countPerLb: 'Scorched Splits',
+            },
+
+            // Pieces, Kolas & Baby Bits
+            {
+                label: 'LWP',
+                subtitle: 'Large White Pieces',
+                image: '/assets/cashew-pieces.jpg',
+                desc: 'Kernels broken into 4–6 uniform white pieces. The global standard for bakeries, ice creams, and luxury sweets.',
+                category: 'pieces',
+                countPerLb: 'Large Cut Pieces',
+            },
+            {
+                label: 'K',
+                subtitle: 'Kernels / Kolas',
+                image: '/assets/cashew-pieces.jpg',
+                desc: 'Clean broken kernels and large splits preferred for traditional sweet manufacturing and industrial cooking.',
+                category: 'pieces',
+                countPerLb: 'Commercial Pieces',
+            },
+            {
+                label: 'LWP-S',
+                subtitle: 'Large White Pieces Scorched',
+                image: '/assets/cashew-pieces.jpg',
+                desc: 'Large broken cashew pieces with a toasted golden hue. Popular for spiced snack mixes and cookie doughs.',
+                category: 'pieces',
+                countPerLb: 'Scorched Large Pieces',
+            },
+            {
+                label: 'SWP',
+                subtitle: 'Small White Pieces',
+                image: '/assets/cashew-pieces.jpg',
+                desc: 'Cleanly broken small white cashew pieces. Excellent for toppings, biscuits, dairy desserts, and granola.',
+                category: 'pieces',
+                countPerLb: 'Small Cut Pieces',
+            },
+            {
+                label: 'SWP-S',
+                subtitle: 'Small White Pieces Scorched',
+                image: '/assets/cashew-pieces.jpg',
+                desc: 'Small broken pieces with light toasted shade, providing concentrated nutty richness to confectionery blends.',
+                category: 'pieces',
+                countPerLb: 'Small Scorched Pieces',
+            },
+            {
+                label: 'SWP-S Small',
+                subtitle: 'Small Pieces Scorched (Fine)',
+                image: '/assets/cashew-pieces.jpg',
+                desc: 'Extra-fine scorched pieces screened for uniform consistency in energy bars, granolas, and chocolate fillings.',
+                category: 'pieces',
+                countPerLb: 'Fine Scorched Pieces',
+            },
+            {
+                label: 'SK1',
+                subtitle: 'Scorched Kolas 1',
+                image: '/assets/cashew-pieces.jpg',
+                desc: 'Grade 1 scorched splits and broken pieces for commercial food preparation, pastes, and gravies.',
+                category: 'pieces',
+                countPerLb: 'Broken Kolas Gr.1',
+            },
+            {
+                label: 'SK2',
+                subtitle: 'Scorched Kolas 2',
+                image: '/assets/cashew-pieces.jpg',
+                desc: 'Grade 2 scorched pieces offering cost-efficient bulk nut solids for institutional food processing.',
+                category: 'pieces',
+                countPerLb: 'Broken Kolas Gr.2',
+            },
+            {
+                label: 'BB1 CLEANED',
+                subtitle: 'Baby Bits 1 (Cleaned)',
+                image: '/assets/cashew-pieces.jpg',
+                desc: 'Finely granulated, fully cleaned baby cashew bits. Ideal for smooth nut butter, kaju katli paste, and sauces.',
+                category: 'pieces',
+                countPerLb: 'Micro Baby Bits',
             },
         ],
-        facts: ['White Wholes (W180, W210, W240, W320)', 'Scorched Wholes (SW)', 'Splits (JH/JK)', 'Pieces (LWP/SWP)'],
+        facts: [
+            'White Wholes: W180 (King), W210 (Jumbo), W240, CW240, W320, CW320, W450, CW450',
+            'Scorched & Dessert: SW240, SW320, SW450, DW (Dessert), SSW (Slightly Scorched)',
+            'Halves, Splits & Butts: FB (Fancy Butts), JH (Jumbo Halves), FS, FS-S, SB, SS',
+            'Pieces & Cleaned Bits: LWP, K, LWP-S, SWP, SWP-S, SWP-S Small, SK1, SK2, BB1 CLEANED',
+        ],
     },
     {
         id: 'black-pepper',
@@ -306,6 +520,8 @@ const ProductVarietiesView: React.FC<ProductVarietiesViewProps> = ({
         );
         return found ? found.id : 'red-chillies';
     });
+
+    const [cashewFilter, setCashewFilter] = useState<'all' | 'wholes' | 'scorched' | 'splits' | 'pieces'>('all');
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -588,47 +804,252 @@ const ProductVarietiesView: React.FC<ProductVarietiesViewProps> = ({
                     </div>
                 )}
 
-                {/* 4. CASHEWS - Exact 2x2 Grid (Matching Image 4) */}
+                {/* 4. CASHEWS - 28 Grades Portfolio with Category Filter & Export Matrix */}
                 {activeProduct.type === 'cashew-grid' && activeProduct.cashewVarieties && (
-                    <div className="mb-14">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
-                            {activeProduct.cashewVarieties.map((v) => (
-                                <div
-                                    key={v.label}
-                                    className="group bg-[#FBF6EC] border-2 border-dashed border-[#C2A470] rounded-[2.5rem] p-7 sm:p-9 flex flex-col items-center text-center shadow-sm hover:shadow-lg transition-all duration-300 relative overflow-hidden"
-                                >
-                                    {/* Circle Image with bowl of cashews */}
-                                    <div className="w-48 h-48 sm:w-56 sm:h-56 rounded-full overflow-hidden border-4 border-white shadow-lg mb-6 bg-white flex-shrink-0 relative">
-                                        <img
-                                            src={v.image}
-                                            alt={v.label}
-                                            className={`w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 ${v.imageClass ? `${v.imageClass} group-hover:scale-120` : ''}`}
-                                        />
-                                    </div>
-
-                                    {/* Title */}
-                                    <h3 className="text-2xl sm:text-3xl font-bold text-[#132644] font-serif uppercase tracking-wide mb-1">
-                                        {v.label}
-                                    </h3>
-
-                                    {/* Subtitle */}
-                                    <p className="text-slate-700 text-base sm:text-lg font-medium">
-                                        {v.subtitle}
-                                    </p>
-                                </div>
-                            ))}
+                    <div className="mb-14 space-y-10">
+                        {/* Category Filter Pills */}
+                        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 max-w-4xl mx-auto">
+                            {[
+                                { id: 'all', label: 'All 28 Grades', count: activeProduct.cashewVarieties.length },
+                                { id: 'wholes', label: 'White Wholes (WW/CW)', count: activeProduct.cashewVarieties.filter((v) => v.category === 'wholes').length },
+                                { id: 'scorched', label: 'Scorched & Dessert (SW/DW)', count: activeProduct.cashewVarieties.filter((v) => v.category === 'scorched').length },
+                                { id: 'splits', label: 'Splits & Butts (JH/FS/FB)', count: activeProduct.cashewVarieties.filter((v) => v.category === 'splits').length },
+                                { id: 'pieces', label: 'Pieces & Baby Bits (LWP/SWP/BB1)', count: activeProduct.cashewVarieties.filter((v) => v.category === 'pieces').length },
+                            ].map((tab) => {
+                                const isActive = cashewFilter === tab.id;
+                                return (
+                                    <button
+                                        key={tab.id}
+                                        onClick={() => setCashewFilter(tab.id as any)}
+                                        className={`px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all flex items-center gap-2 ${
+                                            isActive
+                                                ? 'bg-[#132644] text-white shadow-md'
+                                                : 'bg-white text-[#132644] hover:bg-[#FBF6EC] border border-[#C2A470]/40'
+                                        }`}
+                                    >
+                                        <span>{tab.label}</span>
+                                        <span
+                                            className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
+                                                isActive ? 'bg-[#C2A470] text-[#132644]' : 'bg-[#FBF6EC] text-[#8a6f3f]'
+                                            }`}
+                                        >
+                                            {tab.count}
+                                        </span>
+                                    </button>
+                                );
+                            })}
                         </div>
 
-                        {activeProduct.facts && (
-                            <div className="mt-10 bg-white rounded-2xl p-6 border border-[#132644]/10 max-w-4xl mx-auto">
-                                <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-3">
-                                    Available Commercial Grades &amp; Cuts:
+                        {/* Cashew Grade Cards Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
+                            {activeProduct.cashewVarieties
+                                .filter((v) => cashewFilter === 'all' || v.category === cashewFilter)
+                                .map((v) => (
+                                    <div
+                                        key={v.label}
+                                        className="group bg-[#FBF6EC] border-2 border-dashed border-[#C2A470] rounded-[2.5rem] p-6 sm:p-8 flex flex-col items-center text-center shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+                                    >
+                                        {/* Grade Badge */}
+                                        <div className="mb-4">
+                                            <span className="text-[10px] font-bold text-[#8a6f3f] uppercase tracking-widest bg-white px-3 py-1 rounded-full border border-[#C2A470]/40 shadow-2xs">
+                                                {v.category === 'wholes' && 'White Whole Grade'}
+                                                {v.category === 'scorched' && 'Scorched / Dessert'}
+                                                {v.category === 'splits' && 'Splits & Halves'}
+                                                {v.category === 'pieces' && 'Culinary Pieces & Bits'}
+                                            </span>
+                                        </div>
+
+                                        {/* Circle Image with bowl of cashews */}
+                                        <div className="w-44 h-44 sm:w-52 sm:h-52 rounded-full overflow-hidden border-4 border-white shadow-lg mb-5 bg-white flex-shrink-0 relative">
+                                            <img
+                                                src={v.image}
+                                                alt={v.label}
+                                                className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 ${
+                                                    v.imageClass ? v.imageClass : ''
+                                                }`}
+                                            />
+                                        </div>
+
+                                        {/* Title */}
+                                        <h3 className="text-2xl sm:text-3xl font-bold text-[#132644] font-serif uppercase tracking-wide mb-1">
+                                            {v.label}
+                                        </h3>
+
+                                        {/* Subtitle */}
+                                        <p className="text-[#8a6f3f] text-base sm:text-lg font-semibold font-serif mb-2">
+                                            {v.subtitle}
+                                        </p>
+
+                                        {/* Description */}
+                                        {v.desc && (
+                                            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 flex-grow max-w-xs">
+                                                {v.desc}
+                                            </p>
+                                        )}
+
+                                        {/* Count / Specification tag */}
+                                        {v.countPerLb && (
+                                            <div className="mt-auto mb-4">
+                                                <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#132644] bg-white border border-[#C2A470]/50 px-3 py-1 rounded-full shadow-2xs">
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-[#8a6f3f]"></span>
+                                                    Specification: {v.countPerLb}
+                                                </span>
+                                            </div>
+                                        )}
+
+                                        {/* Action Button */}
+                                        <button
+                                            onClick={() => onEnquire(`Cashew Grade ${v.label} (${v.subtitle})`)}
+                                            className="w-full py-2.5 px-4 bg-[#132644] text-white hover:bg-[#C2A470] hover:text-[#132644] rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm group/btn"
+                                        >
+                                            <span>Request Quote for {v.label}</span>
+                                            <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+                                        </button>
+                                    </div>
+                                ))}
+                        </div>
+
+                        {/* Export Standards Specifications Table */}
+                        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#132644]/10 shadow-sm max-w-6xl mx-auto">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+                                <div>
+                                    <h3 className="text-xl sm:text-2xl font-bold text-[#132644] font-serif">
+                                        Cashew Export Grade Classification Reference
+                                    </h3>
+                                    <p className="text-slate-600 text-xs sm:text-sm mt-1">
+                                        Standard international export classifications for raw processed cashew kernels.
+                                    </p>
+                                </div>
+                                <span className="text-xs font-bold text-[#8a6f3f] bg-[#FBF6EC] border border-[#C2A470]/40 px-3.5 py-1.5 rounded-full self-start sm:self-auto">
+                                    28 Standard Grades
                                 </span>
-                                <div className="flex flex-wrap gap-2">
+                            </div>
+
+                            <div className="rounded-2xl border border-[#132644]/15 overflow-x-auto">
+                                <table className="w-full text-left border-collapse text-xs sm:text-sm">
+                                    <thead>
+                                        <tr className="bg-[#132644] text-white font-bold uppercase tracking-wider text-[11px] sm:text-xs">
+                                            <th className="p-3.5 sm:p-4">Grade Code</th>
+                                            <th className="p-3.5 sm:p-4">Category</th>
+                                            <th className="p-3.5 sm:p-4">Kernel Type / Count</th>
+                                            <th className="p-3.5 sm:p-4">Typical Export Applications</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-slate-100 text-slate-700">
+                                        <tr className="bg-[#FBF6EC]/50 font-semibold text-[#8a6f3f]">
+                                            <td colSpan={4} className="p-3 uppercase tracking-wider text-[11px]">
+                                                1. White Wholes (WW / CW) - Premium &amp; Standard Whole Kernels
+                                            </td>
+                                        </tr>
+                                        <tr className="hover:bg-[#FBF6EC]/30 transition-colors">
+                                            <td className="p-3.5 font-bold text-[#132644]">W180</td>
+                                            <td className="p-3.5">White Whole</td>
+                                            <td className="p-3.5">160–180 / lb (Super Jumbo)</td>
+                                            <td className="p-3.5">Luxury gifting, premium retail packs, gourmet dining</td>
+                                        </tr>
+                                        <tr className="hover:bg-[#FBF6EC]/30 transition-colors">
+                                            <td className="p-3.5 font-bold text-[#132644]">W210</td>
+                                            <td className="p-3.5">White Whole</td>
+                                            <td className="p-3.5">200–210 / lb (Jumbo)</td>
+                                            <td className="p-3.5">High-end retail packaging, export gift tins</td>
+                                        </tr>
+                                        <tr className="hover:bg-[#FBF6EC]/30 transition-colors">
+                                            <td className="p-3.5 font-bold text-[#132644]">W240 / CW240</td>
+                                            <td className="p-3.5">White / Commercial Whole</td>
+                                            <td className="p-3.5">220–240 / lb (Large)</td>
+                                            <td className="p-3.5">Supermarket snack packaging, premium roasting</td>
+                                        </tr>
+                                        <tr className="hover:bg-[#FBF6EC]/30 transition-colors">
+                                            <td className="p-3.5 font-bold text-[#132644]">W320 / CW320</td>
+                                            <td className="p-3.5">White / Commercial Whole</td>
+                                            <td className="p-3.5">300–320 / lb (Standard)</td>
+                                            <td className="p-3.5">Global benchmark export grade, consumer packaging, roasting</td>
+                                        </tr>
+                                        <tr className="hover:bg-[#FBF6EC]/30 transition-colors">
+                                            <td className="p-3.5 font-bold text-[#132644]">W450 / CW450</td>
+                                            <td className="p-3.5">White / Commercial Whole</td>
+                                            <td className="p-3.5">400–450 / lb (Small Whole)</td>
+                                            <td className="p-3.5">Snack mixes, chocolate panning, confectionery bars</td>
+                                        </tr>
+
+                                        <tr className="bg-[#FBF6EC]/50 font-semibold text-[#8a6f3f]">
+                                            <td colSpan={4} className="p-3 uppercase tracking-wider text-[11px]">
+                                                2. Scorched Wholes &amp; Dessert Grades (SW / DW / SSW)
+                                            </td>
+                                        </tr>
+                                        <tr className="hover:bg-[#FBF6EC]/30 transition-colors">
+                                            <td className="p-3.5 font-bold text-[#132644]">SW240 / SW320 / SW450</td>
+                                            <td className="p-3.5">Scorched Whole</td>
+                                            <td className="p-3.5">240, 320, 450 count / lb</td>
+                                            <td className="p-3.5">Flavored snack cashews, spiced roasting, trail mixes</td>
+                                        </tr>
+                                        <tr className="hover:bg-[#FBF6EC]/30 transition-colors">
+                                            <td className="p-3.5 font-bold text-[#132644]">DW / SSW</td>
+                                            <td className="p-3.5">Dessert &amp; Slightly Scorched</td>
+                                            <td className="p-3.5">Assorted Whole Kernels</td>
+                                            <td className="p-3.5">Gourmet bakery fillings, roasted nut blends, confectionery</td>
+                                        </tr>
+
+                                        <tr className="bg-[#FBF6EC]/50 font-semibold text-[#8a6f3f]">
+                                            <td colSpan={4} className="p-3 uppercase tracking-wider text-[11px]">
+                                                3. Halves, Splits &amp; Butts (JH / FS / FB / SB / SS)
+                                            </td>
+                                        </tr>
+                                        <tr className="hover:bg-[#FBF6EC]/30 transition-colors">
+                                            <td className="p-3.5 font-bold text-[#132644]">JH / FS / FS-S</td>
+                                            <td className="p-3.5">Lengthwise Splits</td>
+                                            <td className="p-3.5">Clean Split Halves</td>
+                                            <td className="p-3.5">Garnishing, food service, confectionery, biryanis &amp; curries</td>
+                                        </tr>
+                                        <tr className="hover:bg-[#FBF6EC]/30 transition-colors">
+                                            <td className="p-3.5 font-bold text-[#132644]">FB / SB / SS</td>
+                                            <td className="p-3.5">Fancy &amp; Scorched Butts</td>
+                                            <td className="p-3.5">Transverse Broken Halves</td>
+                                            <td className="p-3.5">Commercial food manufacturing, institutional cooking, snacks</td>
+                                        </tr>
+
+                                        <tr className="bg-[#FBF6EC]/50 font-semibold text-[#8a6f3f]">
+                                            <td colSpan={4} className="p-3 uppercase tracking-wider text-[11px]">
+                                                4. Pieces, Kolas &amp; Cleaned Baby Bits (LWP / SWP / BB1)
+                                            </td>
+                                        </tr>
+                                        <tr className="hover:bg-[#FBF6EC]/30 transition-colors">
+                                            <td className="p-3.5 font-bold text-[#132644]">LWP / LWP-S / K</td>
+                                            <td className="p-3.5">Large White Pieces</td>
+                                            <td className="p-3.5">4–6 Cut Pieces</td>
+                                            <td className="p-3.5">Bakeries, ice creams, traditional luxury sweets, cereal bars</td>
+                                        </tr>
+                                        <tr className="hover:bg-[#FBF6EC]/30 transition-colors">
+                                            <td className="p-3.5 font-bold text-[#132644]">SWP / SWP-S / SWP-S Small</td>
+                                            <td className="p-3.5">Small White Pieces</td>
+                                            <td className="p-3.5">Fine Cut Pieces</td>
+                                            <td className="p-3.5">Ice cream toppings, biscuits, granola, cookies &amp; cakes</td>
+                                        </tr>
+                                        <tr className="hover:bg-[#FBF6EC]/30 transition-colors">
+                                            <td className="p-3.5 font-bold text-[#132644]">SK1 / SK2 / BB1 CLEANED</td>
+                                            <td className="p-3.5">Cleaned Baby Bits &amp; Kolas</td>
+                                            <td className="p-3.5">Micro Cleaned Granules</td>
+                                            <td className="p-3.5">Cashew butter, Kaju Katli paste, sauces, dairy formulations</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        {/* Available Commercial Grade Badges */}
+                        {activeProduct.facts && (
+                            <div className="bg-white rounded-2xl p-6 border border-[#132644]/10 max-w-6xl mx-auto shadow-2xs">
+                                <span className="text-xs font-bold text-[#8a6f3f] uppercase tracking-wider block mb-3 font-serif">
+                                    Full Commercial Export Spectrum:
+                                </span>
+                                <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
                                     {activeProduct.facts.map((fact) => (
-                                        <span key={fact} className="text-xs font-bold text-[#132644] bg-[#FBF6EC] border border-[#C2A470]/50 px-3.5 py-1.5 rounded-full">
+                                        <div
+                                            key={fact}
+                                            className="text-xs text-slate-700 bg-[#FBF6EC] border border-[#C2A470]/40 p-3 rounded-xl font-medium"
+                                        >
                                             {fact}
-                                        </span>
+                                        </div>
                                     ))}
                                 </div>
                             </div>
